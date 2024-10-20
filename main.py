@@ -37,5 +37,6 @@ if __name__ == "__main__":
     finnhub_client = finnhub.Client(api_key="cqtofkpr01qijbg180h0cqtofkpr01qijbg180hg")
     # Basic financials
     print(finnhub_client.company_basic_financials('AAPL', 'all'))
+    process_and_insert_financial_data()
 
     # weather_api_access.return_requested_values("historical_details_aggregate")

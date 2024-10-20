@@ -288,13 +288,17 @@ quarterly_metrics = ['assetTurnoverTTM', 'bookValue', 'cashRatio', 'currentRatio
 
 # PostgreSQL connection details
 conn = psycopg2.connect(
-    dbname="your_database",
-    user="your_username",
-    password="your_password",
-    host="your_host",
-    port="your_port"
+    dbname="postgres",
+    user="davidozoude",  # change to 'postgres'
+    password="password",  # set this to the password you set earlier
+    host="localhost",
+    port="5432"
 )
 cursor = conn.cursor()
+
+# Success. You can now start the database server using:
+#
+#     pg_ctl -D /usr/local/var/postgres -l logfile start
 
 # Modify the table to include a 'timeframe' column
 create_table_query = '''
@@ -333,8 +337,10 @@ def process_single_data_points(metric_list):
         insert_metric(metric.key, None, metric, None)
 
 
-# Call the function to insert financial data into the DB
-process_and_insert_financial_data(basic_financials)
+if __name__ == "__main__":
+
+    # Call the function to insert financial data into the DB
+    process_and_insert_financial_data(basic_financials)
 
 # Close the connection
 cursor.close()
